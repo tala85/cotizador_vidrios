@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* REGLAS ESTRICTAS PARA LA IMPRESORA */
+@media print {
+  /* 1. Engañamos a la impresora diciéndole que no hay margen externo. 
+        Esto obliga a Chrome a OCULTAR la fecha, la URL y el título */
+  @page {
+    margin: 0;
+  }
+
+  /* 2. Le devolvemos un margen "falso" por adentro a nuestra hoja 
+        para que el texto no se imprima pegado al borde físico del papel */
+  body {
+    padding-top: 1.5cm;
+    padding-bottom: 1.5cm;
+    padding-left: 1cm;
+    padding-right: 1cm;
+  }
+}
