@@ -2,24 +2,35 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    // Aquí iría la lógica de Supabase:
-    // const { error } = await supabase.auth.signInWithPassword({ email, password });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-    setTimeout(() => {
-      toast.info("Funcionalidad de inicio de sesión en desarrollo. Por favor, configura las variables de Supabase.");
+      if (error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.success("¡Sesión iniciada con éxito!");
+        router.push('/');
+      }
+    } catch (err) {
+      toast.error("Ocurrió un error inesperado.");
+      console.error(err);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -27,12 +38,12 @@ export default function LoginPage() {
       <div className="max-w-md w-full bg-app-card p-8 rounded-xl shadow-lg border border-app">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-black text-app-foreground uppercase tracking-tight">Acceso</h1>
-          <p className="text-app-muted mt-2 font-medium">Gestiona tus presupuestos desde cualquier lugar</p>
+          <p className="text-app-muted-fg mt-2 font-medium">Gestiona tus presupuestos desde cualquier lugar</p>
         </div>
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-bold text-app-muted uppercase">Correo Electrónico</label>
+            <label className="text-xs font-bold text-app-muted-fg uppercase">Correo Electrónico</label>
             <input
               type="email"
               required
@@ -44,7 +55,7 @@ export default function LoginPage() {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-bold text-app-muted uppercase">Contraseña</label>
+            <label className="text-xs font-bold text-app-muted-fg uppercase">Contraseña</label>
             <input
               type="password"
               required
@@ -65,7 +76,7 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-6 text-center text-sm">
-          <p className="text-app-muted">
+          <p className="text-app-muted-fg">
             ¿No tienes una cuenta? {' '}
             <Link href="/register" className="text-blue-600 font-bold hover:underline">
               Regístrate aquí
@@ -74,7 +85,7 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-app text-center">
-          <Link href="/" className="text-xs text-app-muted hover:text-app-foreground transition-colors">
+          <Link href="/" className="text-xs text-app-muted-fg hover:text-app-foreground transition-colors">
             ← Volver al cotizador
           </Link>
         </div>

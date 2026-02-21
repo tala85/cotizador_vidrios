@@ -10,6 +10,8 @@
   --color-app-muted: var(--muted);
   --color-app-muted-fg: var(--muted-foreground);
   --color-app-border: var(--border);
+  --color-app-accent: var(--accent);
+  --color-app-accent-fg: var(--accent-foreground);
 }
 
 :root {
@@ -20,6 +22,8 @@
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
   --border: #e2e8f0;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
 }
 
 [data-theme='mid'] {
@@ -30,6 +34,8 @@
   --muted: #e2e8f0;
   --muted-foreground: #475569;
   --border: #cbd5e1;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -40,6 +46,8 @@
   --muted: #334155;
   --muted-foreground: #94a3b8;
   --border: #334155;
+  --accent: #3b82f6;
+  --accent-foreground: #ffffff;
 }
 
 body {

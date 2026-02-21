@@ -85,16 +85,16 @@ export default function UploaderPrecios({
       <div className="flex justify-between items-center">
         {/* INDICADOR PERMANENTE DE MEMORIA */}
         {cantidadCargada > 0 ? (
-          <span className="text-xs font-bold bg-green-100 text-green-800 py-1 px-2 rounded-md border border-green-200 shadow-sm">
+          <span className="text-xs font-bold bg-green-500/20 text-green-600 py-1 px-2 rounded-md border border-green-500/30 shadow-sm">
             ✅ {cantidadCargada} precios en memoria
           </span>
         ) : (
-          <span className="text-xs font-bold bg-amber-100 text-amber-800 py-1 px-2 rounded-md border border-amber-200">
+          <span className="text-xs font-bold bg-amber-500/20 text-amber-600 py-1 px-2 rounded-md border border-amber-500/30">
             ⚠️ Memoria vacía
           </span>
         )}
 
-        <button onClick={descargarPlantilla} className="text-xs font-semibold text-blue-600 hover:text-blue-800 underline">
+        <button onClick={descargarPlantilla} className="text-xs font-semibold text-app-accent hover:underline">
           Descargar plantilla Excel
         </button>
       </div>
@@ -105,12 +105,12 @@ export default function UploaderPrecios({
           type="file"
           accept=".csv"
           onChange={manejarSubida}
-          className="block w-full text-sm text-app-muted file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer text-center"
+          className="block w-full text-sm text-app-muted-fg file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-app-muted file:text-app-foreground hover:file:bg-app-card cursor-pointer text-center"
         />
       </div>
 
-      {error && <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm border border-red-200">{error}</div>}
-      {exito && <div className="bg-green-50 text-green-700 p-3 rounded-md text-sm border border-green-200 text-center font-medium">¡Lista actualizada correctamente!</div>}
+      {error && <div className="bg-red-500/10 text-red-500 p-3 rounded-md text-sm border border-red-500/20">{error}</div>}
+      {exito && <div className="bg-green-500/10 text-green-500 p-3 rounded-md text-sm border border-green-500/20 text-center font-medium">¡Lista actualizada correctamente!</div>}
     </div>
   );
 }

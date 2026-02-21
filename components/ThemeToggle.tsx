@@ -12,8 +12,8 @@ export default function ThemeToggle() {
         onClick={() => setTheme('light')}
         className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
           theme === 'light'
-            ? 'bg-white text-slate-800 shadow-sm'
-            : 'text-slate-500 hover:text-slate-700'
+            ? 'bg-app-card text-app-foreground shadow-sm'
+            : 'text-app-muted-fg hover:text-app-foreground'
         }`}
       >
         Claro
@@ -22,8 +22,8 @@ export default function ThemeToggle() {
         onClick={() => setTheme('mid')}
         className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
           theme === 'mid'
-            ? 'bg-slate-300 text-slate-800 shadow-sm'
-            : 'text-slate-500 hover:text-slate-700'
+            ? 'bg-app-card text-app-foreground shadow-sm'
+            : 'text-app-muted-fg hover:text-app-foreground'
         }`}
       >
         Medio
@@ -32,8 +32,8 @@ export default function ThemeToggle() {
         onClick={() => setTheme('dark')}
         className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
           theme === 'dark'
-            ? 'bg-slate-800 text-white shadow-sm'
-            : 'text-slate-400 hover:text-slate-200'
+            ? 'bg-app-card text-app-foreground shadow-sm'
+            : 'text-app-muted-fg hover:text-app-foreground'
         }`}
       >
         Oscuro
