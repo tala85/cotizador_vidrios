@@ -108,19 +108,19 @@ export default function PanelCotizador({
     <div className="flex flex-col gap-6">
 
       {/* Todo este formulario lleva "print:hidden" para que no salga en el PDF */}
-      <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-4 print:hidden">
+      <div className="bg-app-card p-5 rounded-lg border border-app shadow-sm flex flex-col gap-4 print:hidden">
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-slate-600">Tipo de Vidrio</label>
+          <label className="text-sm font-semibold text-app-muted">Tipo de Vidrio</label>
           <div className="flex flex-col gap-2">
             <input
               type="text"
               placeholder="Buscar vidrio..."
               value={busquedaVidrio}
               onChange={(e) => setBusquedaVidrio(e.target.value)}
-              className="p-2 text-sm border border-slate-200 rounded-md bg-slate-50 focus:bg-white transition-colors"
+              className="p-2 text-sm border border-app rounded-md bg-app-muted text-app-foreground focus:bg-app-card transition-colors"
             />
             <select
-              className="p-3 border border-slate-300 rounded-md bg-white text-slate-700 font-medium"
+              className="p-3 border border-app rounded-md bg-app-card text-app-foreground font-medium"
               value={vidrioSeleccionado} onChange={(e) => setVidrioSeleccionado(e.target.value)}
             >
               <option value="">Seleccioná un vidrio...</option>
@@ -138,21 +138,21 @@ export default function PanelCotizador({
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-slate-600">Ancho (m)</label>
+            <label className="text-sm font-semibold text-app-muted">Ancho (m)</label>
             <input
               type="number" step="0.01" placeholder="0.00" value={ancho} onFocus={(e) => e.target.select()}
-              className="p-3 border border-slate-300 rounded-md text-slate-700 w-full" onChange={(e) => setAncho(e.target.value)}
+              className="p-3 border border-app rounded-md bg-app-card text-app-foreground w-full" onChange={(e) => setAncho(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-slate-600">Alto (m)</label>
+            <label className="text-sm font-semibold text-app-muted">Alto (m)</label>
             <input
               type="number" step="0.01" placeholder="0.00" value={alto} onFocus={(e) => e.target.select()}
-              className="p-3 border border-slate-300 rounded-md text-slate-700 w-full" onChange={(e) => setAlto(e.target.value)}
+              className="p-3 border border-app rounded-md bg-app-card text-app-foreground w-full" onChange={(e) => setAlto(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold text-slate-600">Cant.</label>
+            <label className="text-sm font-semibold text-app-muted">Cant.</label>
             <input
               type="number" min="1" value={cantidad} onFocus={(e) => e.target.select()}
               className="p-3 border border-blue-300 rounded-md text-blue-900 font-bold bg-blue-50 w-full" onChange={(e) => setCantidad(e.target.value)}
@@ -160,12 +160,12 @@ export default function PanelCotizador({
           </div>
         </div>
 
-        <div className="mt-2 flex items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-md">
+        <div className="mt-2 flex items-center gap-2 p-3 bg-app-muted border border-app rounded-md">
           <input
             type="checkbox" id="colocacionCheck" checked={conColocacion} onChange={(e) => setConColocacion(e.target.checked)}
             className="w-5 h-5 cursor-pointer accent-blue-600 shrink-0"
           />
-          <label htmlFor="colocacionCheck" className="text-sm font-bold text-slate-700 cursor-pointer select-none">
+          <label htmlFor="colocacionCheck" className="text-sm font-bold text-app-foreground cursor-pointer select-none">
             Incluir servicio de Colocación (+{porcentajeColocacion}%)
           </label>
         </div>
@@ -190,30 +190,30 @@ export default function PanelCotizador({
 
       {/* ---------------- RESUMEN Y PDF ---------------- */}
       {listaPedido.length > 0 && (
-        <div className="mt-6 border-t pt-6 flex flex-col gap-4 print:border-none print:pt-0 print:mt-0">
+        <div className="mt-6 border-t border-app pt-6 flex flex-col gap-4 print:border-none print:pt-0 print:mt-0">
 
           <div className="flex flex-col sm:flex-row justify-between items-end gap-4 print:hidden">
             <div className="flex flex-col gap-4 w-full sm:w-2/3">
-              <h3 className="font-bold text-slate-700 text-lg">Información del Cliente</h3>
+              <h3 className="font-bold text-app-foreground text-lg">Información del Cliente</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs font-bold text-slate-500 uppercase">Nombre / Razón Social</label>
+                  <label className="text-xs font-bold text-app-muted uppercase">Nombre / Razón Social</label>
                   <input
                     type="text"
                     placeholder="Ej: Juan Pérez"
                     value={nombreCliente}
                     onChange={(e) => setNombreCliente(e.target.value)}
-                    className="p-2 border border-slate-300 rounded-md text-sm"
+                    className="p-2 border border-app bg-app-card text-app-foreground rounded-md text-sm"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs font-bold text-slate-500 uppercase">Teléfono / Contacto</label>
+                  <label className="text-xs font-bold text-app-muted uppercase">Teléfono / Contacto</label>
                   <input
                     type="text"
                     placeholder="Ej: 3764-123456"
                     value={contactoCliente}
                     onChange={(e) => setContactoCliente(e.target.value)}
-                    className="p-2 border border-slate-300 rounded-md text-sm"
+                    className="p-2 border border-app bg-app-card text-app-foreground rounded-md text-sm"
                   />
                 </div>
               </div>
@@ -240,26 +240,26 @@ export default function PanelCotizador({
                 </div>
               </div>
               <div className="text-right flex flex-col gap-1">
-                <div className="bg-slate-800 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-widest print:bg-transparent print:text-slate-800 print:p-0">
+            <div className="bg-slate-800 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-widest print:bg-transparent print:text-app-foreground print:p-0">
                   Presupuesto N° {numeroPresupuesto}
                 </div>
-                <p className="text-slate-500 text-xs font-bold uppercase mt-2">Fecha Emisión</p>
-                <p className="text-slate-800 font-mono font-bold text-sm">{fechaHoy}</p>
+            <p className="text-app-muted text-xs font-bold uppercase mt-2">Fecha Emisión</p>
+            <p className="text-app-foreground font-mono font-bold text-sm">{fechaHoy}</p>
               </div>
             </div>
 
             {(nombreCliente || contactoCliente) && (
-              <div className="px-6 py-4 md:px-8 bg-white border-b border-slate-100 flex flex-col gap-1 print:px-0">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Cliente</p>
+          <div className="px-6 py-4 md:px-8 bg-app-card border-b border-app flex flex-col gap-1 print:px-0">
+            <p className="text-[10px] font-black text-app-muted uppercase tracking-widest">Cliente</p>
                 <div className="flex flex-col sm:flex-row sm:gap-8">
                   {nombreCliente && (
-                    <p className="text-sm font-bold text-slate-700">
-                      <span className="text-slate-400 font-medium mr-1 underline decoration-slate-200">Nombre:</span> {nombreCliente}
+                <p className="text-sm font-bold text-app-foreground">
+                  <span className="text-app-muted font-medium mr-1 underline decoration-slate-200">Nombre:</span> {nombreCliente}
                     </p>
                   )}
                   {contactoCliente && (
-                    <p className="text-sm font-bold text-slate-700">
-                      <span className="text-slate-400 font-medium mr-1 underline decoration-slate-200">Contacto:</span> {contactoCliente}
+                <p className="text-sm font-bold text-app-foreground">
+                  <span className="text-app-muted font-medium mr-1 underline decoration-slate-200">Contacto:</span> {contactoCliente}
                     </p>
                   )}
                 </div>
@@ -267,20 +267,20 @@ export default function PanelCotizador({
             )}
 
             <div className="overflow-x-auto print:overflow-visible">
-              <table className="min-w-full divide-y divide-slate-200">
-                <thead className="bg-white">
+          <table className="min-w-full divide-y divide-app">
+            <thead className="bg-app-card">
                   <tr>
-                    <th className="px-4 py-3 md:px-6 md:py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider print:px-2">Detalle del Vidrio</th>
-                    <th className="px-4 py-3 md:px-6 md:py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider print:px-2">Subtotal</th>
+                <th className="px-4 py-3 md:px-6 md:py-4 text-left text-xs font-bold text-app-muted uppercase tracking-wider print:px-2">Detalle del Vidrio</th>
+                <th className="px-4 py-3 md:px-6 md:py-4 text-right text-xs font-bold text-app-muted uppercase tracking-wider print:px-2">Subtotal</th>
                     {/* Ocultamos la columna de acciones en la impresión */}
                     <th className="px-4 py-3 md:px-6 md:py-4 print:hidden">Acciones</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-app">
                   {listaPedido.map((item) => (
-                    <tr key={item.id} className="hover:bg-slate-50 transition-colors print:hover:bg-transparent">
-                      <td className="px-4 py-3 md:px-6 md:py-4 text-sm text-slate-700 font-medium print:px-2">{item.detalle}</td>
-                      <td className="px-4 py-3 md:px-6 md:py-4 text-sm text-right font-mono font-bold text-slate-900 print:px-2">
+                <tr key={item.id} className="hover:bg-app-muted transition-colors print:hover:bg-transparent">
+                  <td className="px-4 py-3 md:px-6 md:py-4 text-sm text-app-foreground font-medium print:px-2">{item.detalle}</td>
+                  <td className="px-4 py-3 md:px-6 md:py-4 text-sm text-right font-mono font-bold text-app-foreground print:px-2">
                         {formatearMoneda(item.subtotal)}
                       </td>
                       {/* Ocultamos los botones de eliminar en la impresión */}
@@ -292,19 +292,19 @@ export default function PanelCotizador({
                     </tr>
                   ))}
                 </tbody>
-                <tfoot className="bg-slate-50 font-medium text-sm print:bg-transparent">
+            <tfoot className="bg-app-muted font-medium text-sm print:bg-transparent">
                   <tr>
-                    <td className="px-4 py-3 md:px-6 md:py-3 text-slate-600 print:px-2">Subtotal Neto</td>
-                    <td className="px-4 py-3 md:px-6 md:py-3 text-right print:px-2">{formatearMoneda(subtotalNeto)}</td>
+                <td className="px-4 py-3 md:px-6 md:py-3 text-app-muted print:px-2">Subtotal Neto</td>
+                <td className="px-4 py-3 md:px-6 md:py-3 text-right text-app-foreground print:px-2">{formatearMoneda(subtotalNeto)}</td>
                     <td className="print:hidden"></td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 md:px-6 md:py-3 text-slate-600 print:px-2">IVA ({porcentajeIva}%)</td>
+                <td className="px-4 py-3 md:px-6 md:py-3 text-app-muted print:px-2">IVA ({porcentajeIva}%)</td>
                     <td className="px-4 py-3 md:px-6 md:py-3 text-right text-red-500 print:px-2">{formatearMoneda(iva)}</td>
                     <td className="print:hidden"></td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 md:px-6 md:py-3 text-slate-600 print:px-2">IIBB ({porcentajeIibb}%)</td>
+                <td className="px-4 py-3 md:px-6 md:py-3 text-app-muted print:px-2">IIBB ({porcentajeIibb}%)</td>
                     <td className="px-4 py-3 md:px-6 md:py-3 text-right text-red-500 print:px-2">{formatearMoneda(iibb)}</td>
                     <td className="print:hidden"></td>
                   </tr>
@@ -319,7 +319,7 @@ export default function PanelCotizador({
               </table>
             </div>
 
-            <div className="p-6 md:p-8 border-t border-slate-200 bg-white print:border-t-2 print:border-slate-100 print:mt-4 print:p-0">
+        <div className="p-6 md:p-8 border-t border-app bg-app-card print:border-t-2 print:border-slate-100 print:mt-4 print:p-0">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                 <div className="text-left">
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Términos y Condiciones</p>

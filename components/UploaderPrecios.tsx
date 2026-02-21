@@ -99,13 +99,13 @@ export default function UploaderPrecios({
         </button>
       </div>
 
-      <div className="p-4 border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center hover:bg-slate-50 transition-colors">
-        <span className="text-sm font-medium text-slate-700 mb-3 text-center">Actualizar lista de precios (CSV)</span>
+      <div className="p-4 border-2 border-dashed border-app rounded-lg flex flex-col items-center justify-center hover:bg-app-muted transition-colors">
+        <span className="text-sm font-medium text-app-foreground mb-3 text-center">Actualizar lista de precios (CSV)</span>
         <input
           type="file"
           accept=".csv"
           onChange={manejarSubida}
-          className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer text-center"
+          className="block w-full text-sm text-app-muted file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer text-center"
         />
       </div>
 

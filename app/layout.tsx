@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css"; // <--- ESTO ES LA MAGIA DEL DISEÑO
 import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/components/ThemeContext';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +12,12 @@ export const metadata: Metadata = {
   keywords: ["vidriería", "cotizador", "presupuestos", "vidrios", "gestión", "argentina"],
   authors: [{ name: "Vidriería Misiones" }],
   robots: "index, follow",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Cotizador Vidrios",
+  },
 };
 
 export const viewport: Viewport = {
@@ -26,8 +33,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
-        {children}
-        <Toaster position="top-right" richColors />
+        <ThemeProvider>
+          {children}
+          <Toaster position="top-right" richColors />
+        </ThemeProvider>
       </body>
     </html>
   );

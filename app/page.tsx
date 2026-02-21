@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import UploaderPrecios from '@/components/UploaderPrecios';
 import PanelCotizador from '@/components/PanelCotizador';
+import ThemeToggle from '@/components/ThemeToggle';
 import { Vidrio } from '@/types';
 
 export default function Home() {
@@ -56,15 +57,25 @@ export default function Home() {
     }
     metaThemeColor.setAttribute("content", colorFondo);
 
-    // 3. Cambia el Favicon (el iconito de la pestaña)
+    // 3. Cambia el Favicon (el iconito de la pestaña) - Mejorado para mayor compatibilidad
     if (logoBase64) {
-      let linkIcon = document.querySelector("link[rel='icon']");
-      if (!linkIcon) {
-        linkIcon = document.createElement("link");
-        linkIcon.setAttribute("rel", "icon");
-        document.head.appendChild(linkIcon);
+      const iconSelectors = ["link[rel='icon']", "link[rel='shortcut icon']", "link[rel='apple-touch-icon']"];
+      let found = false;
+
+      iconSelectors.forEach(selector => {
+        const link = document.querySelector(selector);
+        if (link) {
+          link.setAttribute("href", logoBase64);
+          found = true;
+        }
+      });
+
+      if (!found) {
+        const newIcon = document.createElement("link");
+        newIcon.setAttribute("rel", "icon");
+        newIcon.setAttribute("href", logoBase64);
+        document.head.appendChild(newIcon);
       }
-      linkIcon.setAttribute("href", logoBase64);
     }
   }, [nombreNegocio, colorFondo, logoBase64, estaMontado]);
 
@@ -101,25 +112,31 @@ export default function Home() {
   return (
     <main className="min-h-screen p-4 md:p-8 pb-24 transition-colors duration-300 print:bg-white print:p-0 print:m-0" style={{ backgroundColor: colorFondo }}>
 
-      <div className="max-w-7xl mx-auto bg-white p-4 md:p-8 rounded-xl shadow-lg border border-slate-200 print:shadow-none print:border-none print:max-w-none print:p-0">
+      <div className="max-w-7xl mx-auto bg-app-card p-4 md:p-8 rounded-xl shadow-lg border border-app print:shadow-none print:border-none print:max-w-none print:p-0">
 
-        <header className="border-b border-slate-200 pb-4 mb-6 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left print:hidden">
-          {logoBase64 && (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={logoBase64} alt="Logo" className="h-16 md:h-20 w-auto object-contain rounded-md shadow-sm" />
-          )}
-          <div>
-            <h1 className="text-2xl md:text-4xl font-black text-slate-800 uppercase tracking-tight">
-              {nombreNegocio}
-            </h1>
-            <p className="text-sm md:text-base text-slate-500 mt-1 font-medium">Sistema de Gestión y Presupuestos</p>
+        <header className="border-b border-app pb-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left print:hidden">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+            {logoBase64 && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img src={logoBase64} alt="Logo" className="h-16 md:h-20 w-auto object-contain rounded-md shadow-sm" />
+            )}
+            <div>
+              <h1 className="text-2xl md:text-4xl font-black text-app-foreground uppercase tracking-tight">
+                {nombreNegocio}
+              </h1>
+              <p className="text-sm md:text-base text-app-muted mt-1 font-medium">Sistema de Gestión y Presupuestos</p>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[10px] font-bold text-app-muted uppercase tracking-widest">Modo de Pantalla</span>
+            <ThemeToggle />
           </div>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 print:block">
 
-          <section className="lg:col-span-2 bg-slate-50 p-4 md:p-6 rounded-lg border border-slate-200 print:bg-white print:border-none print:p-0 print:m-0">
-            <h2 className="text-lg md:text-xl font-bold text-slate-700 mb-4 border-b pb-2 print:hidden">Cotizador de vidrios</h2>
+          <section className="lg:col-span-2 bg-app-muted p-4 md:p-6 rounded-lg border border-app print:bg-white print:border-none print:p-0 print:m-0">
+            <h2 className="text-lg md:text-xl font-bold text-app-foreground mb-4 border-b border-app pb-2 print:hidden">Cotizador de vidrios</h2>
             <PanelCotizador
               precios={listaPrecios}
               margen={margenGanancia}
@@ -131,11 +148,11 @@ export default function Home() {
             />
           </section>
 
-          <section className="bg-slate-50 p-4 md:p-6 rounded-lg border border-slate-200 flex flex-col gap-6 print:hidden">
-            <h2 className="text-lg md:text-xl font-bold text-slate-700 mb-2 border-b pb-2">Ajustes del Sistema</h2>
+          <section className="bg-app-muted p-4 md:p-6 rounded-lg border border-app flex flex-col gap-6 print:hidden">
+            <h2 className="text-lg md:text-xl font-bold text-app-foreground mb-2 border-b border-app pb-2">Ajustes del Sistema</h2>
 
-            <div className="flex flex-col gap-4 bg-white p-4 border border-slate-200 rounded-lg shadow-sm border-l-4 border-l-green-500">
-              <h3 className="font-bold text-slate-700 text-xs md:text-sm uppercase">1. Parámetros Financieros</h3>
+            <div className="flex flex-col gap-4 bg-app-card p-4 border border-app rounded-lg shadow-sm border-l-4 border-l-green-500">
+              <h3 className="font-bold text-app-foreground text-xs md:text-sm uppercase">1. Parámetros Financieros</h3>
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex flex-col gap-1 w-full sm:w-1/2">
                   <label className="text-xs font-bold text-slate-600">Margen Ganancia (%)</label>
@@ -175,13 +192,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 bg-white p-4 border border-slate-200 rounded-lg shadow-sm border-l-4 border-l-blue-500">
-              <h3 className="font-bold text-slate-700 text-xs md:text-sm uppercase">2. Marca y Diseño</h3>
+            <div className="flex flex-col gap-4 bg-app-card p-4 border border-app rounded-lg shadow-sm border-l-4 border-l-blue-500">
+              <h3 className="font-bold text-app-foreground text-xs md:text-sm uppercase">2. Marca y Diseño</h3>
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-slate-600">Nombre de la Vidriería</label>
+                <label className="text-xs font-bold text-app-muted">Nombre de la Vidriería</label>
                 <input
                   type="text" value={nombreNegocio} onChange={manejarCambioNombre}
-                  className="p-2 border border-slate-300 rounded-md text-slate-800 font-semibold w-full"
+                  className="p-2 border border-app rounded-md bg-app-muted text-app-foreground font-semibold w-full"
                 />
               </div>
               <div className="flex flex-col gap-2 w-full overflow-hidden">
@@ -201,8 +218,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-white p-4 border border-slate-200 rounded-lg shadow-sm border-l-4 border-l-slate-500">
-              <h3 className="font-bold text-slate-700 text-xs md:text-sm uppercase mb-3">3. Lista de Costos</h3>
+            <div className="bg-app-card p-4 border border-app rounded-lg shadow-sm border-l-4 border-l-slate-500">
+              <h3 className="font-bold text-app-foreground text-xs md:text-sm uppercase mb-3">3. Lista de Costos</h3>
               <UploaderPrecios alCargarPrecios={manejarCargaPrecios} cantidadCargada={listaPrecios.length} />
             </div>
 

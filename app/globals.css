@@ -1,19 +1,72 @@
 @import "tailwindcss";
 
-/* REGLAS ESTRICTAS PARA LA IMPRESORA */
-@media print {
-  /* 1. Engañamos a la impresora diciéndole que no hay margen externo.
-        Esto obliga a Chrome a OCULTAR la fecha, la URL y el título */
-  @page {
-    margin: 0;
-  }
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 
-  /* 2. Le devolvemos un margen "falso" por adentro a nuestra hoja
-        para que el texto no se imprima pegado al borde físico del papel */
+  --color-app-bg: var(--background);
+  --color-app-fg: var(--foreground);
+  --color-app-card: var(--card);
+  --color-app-muted: var(--muted);
+  --color-app-muted-fg: var(--muted-foreground);
+  --color-app-border: var(--border);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+}
+
+[data-theme='mid'] {
+  --background: #f1f5f9;
+  --foreground: #1e293b;
+  --card: #f8fafc;
+  --card-foreground: #1e293b;
+  --muted: #e2e8f0;
+  --muted-foreground: #475569;
+  --border: #cbd5e1;
+}
+
+[data-theme='dark'] {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --border: #334155;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border);
+  }
+}
+
+@media print {
   body {
-    padding-top: 1.5cm;
-    padding-bottom: 1.5cm;
-    padding-left: 1cm;
-    padding-right: 1cm;
+    background: white !important;
+    color: black !important;
+  }
+  [data-theme] {
+    --background: #ffffff;
+    --foreground: #000000;
+    --card: #ffffff;
+    --border: #e2e8f0;
   }
 }
